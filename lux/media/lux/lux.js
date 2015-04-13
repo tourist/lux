@@ -2287,23 +2287,18 @@ angular.module("page/breadcrumbs.tpl.html", []).run(["$templateCache", function(
                 link: function(scope, element, attrs, ctrl) {
                     var other = element.inheritedData("$formController")[attrs.checkRepeat];
                     if (other) {
-                        ctrl.$parsers.push(function(value) {
-                            if(value === other.$viewValue) {
-                                ctrl.$setValidity("repeat", true);
-                                return value;
+                        ctrl.$validators.checkrepeat = function (modelValue, viewValue) {
+                            if (viewValue === other.$viewValue) {
+                                return true;
                             }
-                            ctrl.$setValidity("repeat", false);
-                        });
-
-                        other.$parsers.push(function(value) {
-                            ctrl.$setValidity("repeat", value === ctrl.$viewValue);
-                            return value;
-                        });
+                            return false;
+                        };
                     } else {
                         log.error('Check repeat directive could not find ' + attrs.checkRepeat);
                     }
                  }
             };
+
         }])
         //
         // A directive which add keyup and change event callaback
