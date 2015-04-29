@@ -167,7 +167,7 @@
                 //
                 fillDefaults: function (scope) {
                     var field = scope.field;
-                    field.label = field.label || field.name;
+                    field.label = (field.label || field.name) + ' ' + (field.required ? '*': '');
                     scope.formCount++;
                     if (!field.id)
                         field.id = field.name + '-' + scope.formid + '-' + scope.formCount;

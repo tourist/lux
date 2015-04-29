@@ -1,6 +1,6 @@
 //      Lux Library - v0.1.1
 
-//      Compiled 2015-04-28.
+//      Compiled 2015-04-29.
 //      Copyright (c) 2015 - Luca Sbardella
 //      Licensed BSD.
 //      For all details and documentation:
@@ -1704,7 +1704,7 @@ angular.module("page/breadcrumbs.tpl.html", []).run(["$templateCache", function(
                 //
                 fillDefaults: function (scope) {
                     var field = scope.field;
-                    field.label = field.label || field.name;
+                    field.label = (field.label || field.name) + ' ' + (field.required ? '*': '');
                     scope.formCount++;
                     if (!field.id)
                         field.id = field.name + '-' + scope.formid + '-' + scope.formCount;
@@ -2050,6 +2050,7 @@ angular.module("page/breadcrumbs.tpl.html", []).run(["$templateCache", function(
                     $lux.log.error('Layout "' + field.layout + '" not available, cannot render form');
             };
             //
+            // Initialise the form scope
             this.initScope = function (scope, element, attrs) {
                 var data = getOptions(attrs);
 
